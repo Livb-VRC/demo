@@ -9,6 +9,7 @@ import org.hibernate.annotations.Subselect;
 import org.springframework.data.annotation.Immutable;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Data

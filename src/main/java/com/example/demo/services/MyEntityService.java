@@ -1,25 +1,29 @@
 package com.example.demo.services;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
-import java.util.List;
+import java.io.Serializable;
 
 @Service
-public class MyEntityService<T_Entity> {
+public class MyEntityService<T> implements IMyEntityService<T>{
 
-    @Autowired
-    JpaRepository<T_Entity, Long> repository;
+    private CrudRepository<T, Long> repository;
 
-    public List<T_Entity> findAll() {
+    public Iterable<T> findAll() {
         return this.repository.findAll();
     }
 
-    public T_Entity findById(Long id) throws EntityNotFoundException{
-        return this.repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entity with id " + id + "not found"));
+    public void setRepository(CrudRepository<T, Long> repository) {
+        this.repository = repository;
     }
 
-
+    @Override
+    public T findById(Long id) {
+        return this.repository.findById(id).get();
+    }
 }

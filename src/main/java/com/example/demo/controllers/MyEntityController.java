@@ -1,27 +1,35 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.Item;
-import com.example.demo.services.MyEntityService;
+import com.example.demo.services.IMyEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.List;
+import javax.annotation.PostConstruct;
 
-public class MyEntityController<T_Entity> {
+public abstract class MyEntityController<T> {
+    @Autowired
+    IMyEntityService<T> service;
 
     @Autowired
-    MyEntityService<T_Entity> service;
+    CrudRepository<T, Long> repository;
+
+    // For some reason autowired crudrepo does not work if I put it in MyEntityService so I have to set it here
+    @PostConstruct
+    public void init(){
+        this.service.setRepository(repository);
+    }
 
     @GetMapping("")
-    public ResponseEntity<List<T_Entity>> findAll(){
-        return new ResponseEntity<List<T_Entity>>(this.service.findAll(), HttpStatus.OK);
+    public ResponseEntity<Iterable<T>> findAll(){
+        return new ResponseEntity<Iterable<T>>(this.service.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<T_Entity> findById(@PathVariable Long id){
-        return new ResponseEntity<T_Entity>(this.service.findById(id), HttpStatus.OK);
+    public ResponseEntity<T> findById(@PathVariable Long id){
+        return new ResponseEntity<T>(this.repository.findById(id).get(), HttpStatus.OK);
     }
 }

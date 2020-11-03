@@ -2,10 +2,9 @@ package com.example.demo.models;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Data
@@ -21,4 +20,8 @@ public class Course {
 
     @Column(name = "DESCRIPTION")
     String description;
+
+//    @OneToMany
+//    @JoinColumn(name = "COURSE_ID", referencedColumnName = "ID")
+//    List<Student> students;
 }
