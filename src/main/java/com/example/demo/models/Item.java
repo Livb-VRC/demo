@@ -14,10 +14,7 @@ import java.io.Serializable;
 @Entity
 @Data
 @Table(name="ITEM")
-public class Item {
-    @Id
-    @Column(name = "ID")
-    long id;
+public class Item extends AbstractBaseEntity{
 
     @Column(name="NAME")
     String name;
@@ -25,7 +22,5 @@ public class Item {
     @Column(name="PRICE")
     long price;
 
-    @Column(name = "DELETED")
-    Boolean deleted;
 
 }
