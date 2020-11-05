@@ -7,13 +7,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class AbstractBaseService<T extends AbstractBaseEntity> {
 
-    public void setRepository(AbstractBaseRepository<T> repository) {
-        this.repository = repository;
-    }
+public abstract class AbstractBaseService<T extends AbstractBaseEntity> {
 
+    @Autowired
     AbstractBaseRepository<T> repository;
 
     public List<T> findAll() {

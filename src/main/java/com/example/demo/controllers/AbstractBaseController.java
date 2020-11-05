@@ -15,15 +15,7 @@ import java.util.List;
 public abstract class AbstractBaseController<T extends AbstractBaseEntity> {
 
     @Autowired
-    AbstractBaseRepository<T> repository;
-
-    @Autowired
     AbstractBaseService<T> service;
-
-    @PostConstruct
-    public void init() {
-        this.service.setRepository(this.repository);
-    }
 
     @GetMapping("")
     public ResponseEntity<List<T>> findAll(){
