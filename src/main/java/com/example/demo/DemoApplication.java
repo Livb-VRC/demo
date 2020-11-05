@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
@@ -17,16 +18,25 @@ public class DemoApplication {
 	@Autowired
 	Foo<String> fooStr;
 
+	@Autowired
+	Foo<Long> fooLong;
+
 	@EventListener(ApplicationReadyEvent.class)
 	public void doSomethingAfterStartup() {
-		System.out.println("hello world, I have just started up");
+		System.out.println("hello world, I have just started up " + counter);
 	}
 
-	@Service
+	static int counter = 0;
+
+
 	class Foo <T> {
 		public Foo(){
-			System.out.println("I'm foo");
 		}
+	}
+
+	@Bean
+	public Foo<?> getFoo(){
+		return new Foo<>();
 	}
 
 
