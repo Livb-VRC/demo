@@ -1,9 +1,7 @@
-package com.example.demo.models;
+package com.example.demo.abstracts;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;

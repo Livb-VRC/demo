@@ -1,9 +1,6 @@
-package com.example.demo.services;
+package com.example.demo.abstracts;
 
-import com.example.demo.models.AbstractBaseEntity;
-import com.example.demo.repository.AbstractBaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.abstracts.AbstractBaseController;
 import com.example.demo.models.Item;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

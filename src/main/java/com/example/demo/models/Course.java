@@ -1,15 +1,14 @@
 package com.example.demo.models;
 
-import com.example.demo.repository.AbstractBaseRepository;
+import com.example.demo.abstracts.AbstractBaseEntity;
 import lombok.Data;
+import org.hibernate.annotations.Subselect;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Data
-@Table(name = "COURSE")
+@Subselect("SELECT * FROM course WHERE DELETED = 0")
 public class Course extends AbstractBaseEntity {
 
     @Column(name = "NAME")
